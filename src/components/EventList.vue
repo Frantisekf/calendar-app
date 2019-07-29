@@ -1,6 +1,6 @@
 <template>
   <div class="event-list__wrapper">
-    <div class="container" id="todo">
+    <div class="container">
       <section class="panel">
         <input v-model="newEvent" @keyup.enter="addEvent" placeholder="Create a new event"
                autofocus class="text-input">
@@ -8,10 +8,8 @@
 
       <section class="list">
         <ul class="list-item">
-          <li v-for="task in events">
+          <li v-for="task in events" @click="removeEvent">
             {{ task.text }}
-
-            <button class="delete" @click="removeTask(task)"></button>
           </li>
         </ul>
       </section>
@@ -20,41 +18,41 @@
 </template>
 
 <script>
-  export default {
-    name: 'EventList',
-    data() {
-      return {
-        newEvent: '',
+export default {
+  name: 'EventList',
+  data() {
+    return {
+      newEvent: '',
 
-      };
+    };
+  },
+
+  props: {
+    events: Array,
+  },
+
+
+  methods: {
+    addEvent() {
+      const event = this.newEvent.trim();
+      this.$store.commit('addEvent', event);
+      if (event) {
+        this.events.push({
+          text: event,
+        });
+        this.newEvent = '';
+      }
     },
 
-    props: {
-      events: Array,
+    removeEvent(event) {
+      const index = this.events.indexOf(event);
+      this.events.splice(index, 1);
+      this.$store.commit('removeEvent', event);
     },
+  },
 
 
-    methods: {
-      addEvent() {
-        const task = this.newEvent.trim();
-        this.$store.commit('addEvent', task);
-        if (task) {
-          this.events.push({
-            text: task,
-          });
-          this.newEvent = '';
-        }
-      },
-
-      removeTask(task) {
-        const index = this.events.indexOf(task);
-        this.events.splice(index, 1);
-        this.$store.commit('removeEvent', task);
-      },
-    },
-
-
-  };
+};
 
 
 </script>
