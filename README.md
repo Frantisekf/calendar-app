@@ -1,5 +1,9 @@
 # calendar-app
 
+in order to compile the project a version of node.js is required to be installed on a machine
+https://nodejs.org/en/
+
+
 ## Project setup
 ```
 npm install
