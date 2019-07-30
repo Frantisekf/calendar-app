@@ -1,5 +1,10 @@
 # calendar-app
 
+# check the live preview on codesandbox
+```
+https://codesandbox.io/s/calendar-app-f84ub?fontsize=14
+```
+
 in order to compile the project a version of node.js is required to be installed on a machine
 https://nodejs.org/en/
 
